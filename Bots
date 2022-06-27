@@ -1,6 +1,6 @@
 if not game:IsLoaded() then game.Loaded:Wait() end
 
-local OwnerNames = {"rinqed","headshot56yt","bigmanwithforehead3"}
+local OwnerNames = {"rinqed","remotivate","headshot56yt","bigmanwithforehead3"}
 
 local Players = game.Players
 local Player = Players.LocalPlayer
