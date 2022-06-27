@@ -26,7 +26,7 @@ if not table.find(OwnerNames,Player.Name) then
     
     local BotOrder = {"rinq_Bot","rinq_Bot0","rinq_Bot1","rinq_Bot2","rinq_Bot3","rinq_Bot4","rinq_Bot5","rinq_Bot6","rinq_Bot8","rinq_Bot9","rinq_Bot10","rinq_Bot11","rinq_Bot12","rinq_Bot13","rinq_Bot14","rinq_Bot15","rinq_Bot16","rinq_Bot17","rinq_Bot19","rinq_Bot20"}
     local Commands = {}
-    local BannedCmd = {"kick","addowner","clearowner","rejoin","execute"}
+    local BannedCmd = {"kick","addowner","clearowner","rejoin","execute","spam"}
     local OwnerConns = {}
     local Conns = {}
     local Spam = false
@@ -211,7 +211,7 @@ if not table.find(OwnerNames,Player.Name) then
         
         local Rot = 0
         
-        if Conns["Orbit"] then Conns["Orbit"]:Disconnect() end
+        if Conns["Orbit"] then Conns["Orbit"]:Disconnect() Conns["Orbit"] = nil end
         Conns["Orbit"] = game.RunService.Stepped:connect(function(t, dt)
             Rot = Rot + dt / RotSpeed
             Root(Character).CFrame = Rotation * CFrame.new(sin(Rot)*Width, 0, cos(Rot)*Radius) * CFrame.new(Vic.Position)
@@ -220,6 +220,21 @@ if not table.find(OwnerNames,Player.Name) then
     
     AddCmd("stoporbit",function()
         Conns["Orbit"]:Disconnect()
+        Conns["Orbit"] = nil
+    end)
+    
+    AddCmd("stack",function(Vic)
+        Vic = GetPlayer(Vic).Character
+        
+        if Conns["Stack"] then Conns["Stack"]:Disconnect() Conns["Stack"] = nil end
+        Conns["Stack"] = game.RunService.RenderStepped:Connect(function()
+            Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(0,0,(table.find(BotOrder,Player.Name))*5)
+        end)
+    end)
+    
+    AddCmd("stopstack",function()
+        Conns["Stack"]:Disconnect()
+        Conns["Stack"] = nil
     end)
     
     AddCmd("hugelegs",function()
