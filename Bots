@@ -15,6 +15,8 @@ end)
 if not table.find(OwnerNames,Player.Name) then
     game.RunService:Set3dRenderingEnabled(false)
     
+    local pi, sin, cos, random = math.pi, math.sin, math.cos, math.random
+    
     function Chat(Text)
         game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Text,"All")
     end
@@ -193,6 +195,10 @@ if not table.find(OwnerNames,Player.Name) then
         end
     end)
     
+    AddCmd("scatter",function(Distance)
+        Character.Humanoid.WalkToPoint = Root(Character).Position + Vector3.new(random(-Distance,Distance),Root(Character).Position.Y,random(-Distance,Distance))
+    end)
+    
     AddCmd("sort",function(Speaker)
         local Vic = GetPlayer(Speaker).Character
         local Position = Vector3.new((table.find(BotOrder,Player.Name))*3,0,0)
@@ -212,8 +218,7 @@ if not table.find(OwnerNames,Player.Name) then
         if not Radius then Radius = 8 end
         if not Width then Width = 1 end
         local Rotation = CFrame.Angles(0,0,0)
-        local sin, cos = math.sin, math.cos
-        local RotSpeed = math.pi*2/Speed
+        local RotSpeed = pi*2/Speed
         Width = Width * Radius
         
         wait(table.find(BotOrder,Player.Name))
