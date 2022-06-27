@@ -228,7 +228,8 @@ if not table.find(OwnerNames,Player.Name) then
         
         if Conns["Stack"] then Conns["Stack"]:Disconnect() Conns["Stack"] = nil end
         Conns["Stack"] = game.RunService.RenderStepped:Connect(function()
-            Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(0,0,(table.find(BotOrder,Player.Name))*5)
+            local Position = Vector3.new(0,(table.find(BotOrder,Player.Name))*5,0)
+            Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(Position)
         end)
     end)
     
