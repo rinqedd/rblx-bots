@@ -271,7 +271,7 @@ if not table.find(OwnerNames,Player.Name) then
     AddCmd("cmds",function()
         local Cmds = ""
         for Cmd,_ in pairs(Commands) do wait()
-            if (table.find(Commands,Cmd) % 10) == 0 do
+            if (table.find(Commands,Cmd) % 10) == 0 then
                 Chat(Cmds)
                 Cmds = ""
             end
