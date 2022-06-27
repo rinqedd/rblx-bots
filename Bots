@@ -177,7 +177,7 @@ if not table.find(OwnerNames,Player.Name) then
     end)
     
     AddCmd("rejoin",function()
-        syn.queue_on_teleport([[loadstring(game:HttpGet("https://github.com/rinqedd/rblx/blob/main/scripts/Bots"))()]])
+        syn.queue_on_teleport([[loadstring(game:HttpGet("https://github.com/rinqedd/rblx-bots/blob/main/Bots"))()]])
         if #Players:GetPlayers() <= 1 then
             game.TeleportService:Teleport(game.PlaceId,Player)
         else
