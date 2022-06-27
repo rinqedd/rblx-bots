@@ -227,7 +227,7 @@ if not table.find(OwnerNames,Player.Name) then
         local Vic = GetPlayer(Speaker).Character
         local Position = Vector3.new(0,(table.find(BotOrder,Player.Name))*5,0)
         Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(Position)
-        wait(0.1)
+        wait(0.2)
         Root(Character).Anchored = true
     end)
     
