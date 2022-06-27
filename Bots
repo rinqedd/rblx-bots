@@ -24,7 +24,7 @@ if not table.find(OwnerNames,Player.Name) then
         Character = Char
     end)
     
-    local BotOrder = {"rinq_Bot","rinq_Bot0","rinq_Bot1","rinq_Bot2","rinq_Bot3","rinq_Bot4","rinq_Bot5","rinq_Bot6","rinq_Bot8","rinq_Bot9","rinq_Bot10","rinq_Bot11","rinq_Bot12","rinq_Bot13","rinq_Bot14","rinq_Bot15","rinq_Bot16","rinq_Bot17","rinq_Bot19","rinq_Bot20"}
+    local BotOrder = {"rinq_Bot","rinq_Bot0","rinq_Bot1","rinq_Bot2","rinq_Bot3","rinq_Bot4","rinq_Bot5","rinq_Bot6","rinq_Bot8","rinq_Bot9","rinq_Bot10","rinq_Bot11","rinq_Bot12","rinq_Bot13","rinq_Bot14","rinq_Bot15","rinq_Bot16","rinq_Bot17","rinq_Bot18","rinq_Bot19","rinq_Bot20"}
     local Commands = {}
     local BannedCmd = {"kick","addowner","clearowner","rejoin"}
     local OwnerConns = {}
@@ -270,13 +270,17 @@ if not table.find(OwnerNames,Player.Name) then
     
     AddCmd("cmds",function()
         local Cmds = ""
-        for Cmd,_ in pairs(Commands) do
+        for Cmd,_ in pairs(Commands) do wait()
+            if table.find(Commands,Cmd) % 10 == 0 do
+                Chat(Cmds)
+                Cmds = ""
+            end
+            wait()
             if Cmds == "" then
                 Cmds = Cmds..Cmd
             else
                 Cmds = Cmds.." | "..Cmd
             end
         end
-        Chat(Cmds)
     end)
 end
