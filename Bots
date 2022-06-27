@@ -226,16 +226,13 @@ if not table.find(OwnerNames,Player.Name) then
     AddCmd("stack",function(Vic)
         Vic = GetPlayer(Vic).Character
         
-        if Conns["Stack"] then Conns["Stack"]:Disconnect() Conns["Stack"] = nil end
-        Conns["Stack"] = game.RunService.RenderStepped:Connect(function()
-            local Position = Vector3.new(0,(table.find(BotOrder,Player.Name))*5,0)
-            Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(Position)
-        end)
+        local Position = Vector3.new(0,(table.find(BotOrder,Player.Name))*5,0)
+        Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(Position)
+        Root(Character).Anchored = true
     end)
     
     AddCmd("stopstack",function()
-        Conns["Stack"]:Disconnect()
-        Conns["Stack"] = nil
+        Root(Character).Anchored = false
     end)
     
     AddCmd("hugelegs",function()
