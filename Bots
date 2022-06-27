@@ -28,6 +28,7 @@ if not table.find(OwnerNames,Player.Name) then
     local Commands = {}
     local BannedCmd = {"leave","addowner","clearowner","rejoin","execute","spam"}
     local OwnerConns = {}
+    local AutoChat = {"rinq_Bot8 is our leader","FEED US OIL","Ban 1 and 10 more come back"}
     local Conns = {}
     local Spam = false
     
@@ -116,6 +117,14 @@ if not table.find(OwnerNames,Player.Name) then
         Character.Humanoid.Health = 0
     end)
     
+    AddCmd("refresh",function()
+        local CFrame = Character.HumanoidRootPart.CFrame
+        Character:Destroy()
+        Player.CharacterAdded:Wait()
+        repeat wait() until Player.Character and Player.Character:FindFirstChild("HumanoidRootPart")
+        Character.HumanoidRootPart.CFrame = CFrame
+    end)
+    
     AddCmd("leave",function()
         game:Shutdown()
     end)
@@ -166,7 +175,7 @@ if not table.find(OwnerNames,Player.Name) then
         end
     end)
     
-    AddCmd("unspam",function()
+    AddCmd("stopspam",function()
         Spam = false
     end)
     
