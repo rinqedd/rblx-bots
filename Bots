@@ -63,7 +63,7 @@ if not table.find(OwnerNames,Player.Name) then
     
     function OnChat(Message,Speaker)
         local Args = string.split(Message," ")
-        local Cmd = Args[1]
+        local Cmd = Args[1]:lower()
         table.remove(Args,1)
         
         if Commands[Cmd] then
@@ -100,7 +100,7 @@ if not table.find(OwnerNames,Player.Name) then
         
         if Conns["Follow"] then Conns["Follow"]:Disconnect() end
         Conns["Follow"] = game.RunService.RenderStepped:Connect(function()
-            Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(0,0,3)
+            Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(0,0,(table.find(BotOrder,Player.Name)*3))
         end)
     end)
     
