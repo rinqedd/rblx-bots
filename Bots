@@ -223,6 +223,34 @@ if not table.find(OwnerNames,Player.Name) then
         Conns["Orbit"]:Disconnect()
     end)
     
+    AddCmd("hugelegs",function()
+        local Hum = {
+            "BodyTypeScale",
+            "BodyProportionScale",
+            "BodyWidthScale",
+            "BodyHeightScale",
+            "BodyDepthScale",
+            "HeadScale"
+        }
+        
+        function Remove()
+            repeat task.wait() until Character.RightFoot:FindFirstChild("OriginalSize")
+            Character.RightFoot.OriginalSize:Destroy()
+            Character.RightLowerLeg.OriginalSize:Destroy()
+            Character.RightUpperLeg.OriginalSize:Destroy()
+        end
+        
+        Character.RightLowerLeg.RightKneeRigAttachment.OriginalPosition:Destroy()
+        Character.RightUpperLeg.RightKneeRigAttachment.OriginalPosition:Destroy()
+        Character.RightLowerLeg.RightKneeRigAttachment:Destroy()
+        Character.RightUpperLeg.RightKneeRigAttachment:Destroy()
+        
+        for i=1,6 do
+            Remove()
+            Character.Humanoid[Hum[i]]:Destroy()
+        end
+    end)
+    
     AddCmd("tempowner",function(Plr)
         local User = GetPlayer(Plr)
         local Conn = User.Chatted:Connect(function(Message)
