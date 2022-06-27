@@ -106,7 +106,7 @@ if not table.find(OwnerNames,Player.Name) then
         end)
     end)
     
-    AddCmd("unfollow",function()
+    AddCmd("stopfollow",function()
         Conns["Follow"]:Disconnect()
     end)
     
@@ -115,11 +115,11 @@ if not table.find(OwnerNames,Player.Name) then
         
         if Conns["WalkFollow"] then Conns["WalkFollow"]:Disconnect() end
         Conns["WalkFollow"] = game.RunService.RenderStepped:Connect(function()
-            Character.Humanoid.WalkToPoint = Vic.Position
+            Character.Humanoid:MoveTo(Root(Vic).Position)
         end)
     end)
     
-    AddCmd("unwalkfollow",function()
+    AddCmd("stopwalkfollow",function()
         Conns["WalkFollow"]:Disconnect()
         Conns["WalkFollow"] = nil
     end)
@@ -255,7 +255,7 @@ if not table.find(OwnerNames,Player.Name) then
         local Vic = GetPlayer(Speaker).Character
         local Position = Vector3.new(0,(table.find(BotOrder,Player.Name))*5,0)
         Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(Position)
-        wait(0.2)
+        wait(0.05)
         Root(Character).Anchored = true
     end)
     
