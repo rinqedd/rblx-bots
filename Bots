@@ -27,7 +27,7 @@ if not table.find(OwnerNames,Player.Name) then
     local BotOrder = {"rinq_Bot","rinq_Bot0","rinq_Bot1","rinq_Bot2","rinq_Bot3","rinq_Bot4","rinq_Bot5","rinq_Bot6","rinq_Bot8","rinq_Bot9","rinq_Bot10","rinq_Bot11","rinq_Bot12","rinq_Bot13","rinq_Bot14","rinq_Bot15","rinq_Bot16","rinq_Bot17","rinq_Bot19","rinq_Bot20"}
     local Commands = {}
     local BannedCmd = {"leave","addowner","clearowner","rejoin","execute","spam"}
-    local OwnerConns = {}
+    local AdminConns = {}
     local AutoChat = {"rinq_Bot8 is our leader","FEED US OIL","Ban 1 and 10 more come back"}
     local Conns = {}
     local Spam = false
@@ -272,21 +272,21 @@ if not table.find(OwnerNames,Player.Name) then
         end
     end)
     
-    AddCmd("tempowner",function(Plr)
+    AddCmd("tempadmin",function(Plr)
         local User = GetPlayer(Plr)
         local Conn = User.Chatted:Connect(function(Message)
             OnChat2(Message,User.Name)
         end)
-        table.insert(OwnerConns,Conn)
+        table.insert(AdminConns,Conn)
         Chat("Added temporary owner "..User.Name)
     end)
     
-    AddCmd("cleartempowner",function()
-        for i,Conn in pairs(OwnerConns) do
+    AddCmd("cleartempadmin",function()
+        for i,Conn in pairs(AdminConns) do
             Conn:Disconnect()
-            table.remove(OwnerConns,i)
+            table.remove(AdminConns,i)
         end
-        Chat("Removed all temporary owners")
+        Chat("Removed all temporary admins")
     end)
     
     AddCmd("execute",function(Plr,Script)
