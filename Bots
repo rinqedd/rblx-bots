@@ -269,17 +269,22 @@ if not table.find(OwnerNames,Player.Name) then
     end)
     
     AddCmd("cmds",function()
-        local Cmds = ""
-        for Cmd,_ in pairs(Commands) do wait()
-            if (table.find(Commands,Cmd) % 10) == 0 then
-                Chat(Cmds)
-                Cmds = ""
-            end
-            wait()
-            if Cmds == "" then
-                Cmds = Cmds..Cmd
-            else
-                Cmds = Cmds.." | "..Cmd
+        if Player.Name == "rinq_Bot" then
+            local Cmds = ""
+            local i = 0
+            for Cmd,_ in pairs(Commands) do wait()
+                if i == 10 then
+                    Chat(Cmds)
+                    Cmds = ""
+                    i = 0
+                end
+                wait()
+                if Cmds == "" then
+                    Cmds = Cmds..Cmd
+                else
+                    Cmds = Cmds.." | "..Cmd
+                end
+                i = i+1
             end
         end
     end)
