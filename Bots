@@ -26,7 +26,7 @@ if not table.find(OwnerNames,Player.Name) then
     
     local BotOrder = {"rinq_Bot","rinq_Bot0","rinq_Bot1","rinq_Bot2","rinq_Bot3","rinq_Bot4","rinq_Bot5","rinq_Bot6","rinq_Bot8","rinq_Bot9","rinq_Bot10","rinq_Bot11","rinq_Bot12","rinq_Bot13","rinq_Bot14","rinq_Bot15","rinq_Bot16","rinq_Bot17","rinq_Bot19","rinq_Bot20"}
     local Commands = {}
-    local BannedCmd = {"kick","addowner","clearowner","rejoin","execute","spam"}
+    local BannedCmd = {"leave","addowner","clearowner","rejoin","execute","spam"}
     local OwnerConns = {}
     local Conns = {}
     local Spam = false
@@ -54,7 +54,7 @@ if not table.find(OwnerNames,Player.Name) then
     end
     
     function RunCmd(Cmd,Args,Speaker)
-        if Cmd == "bring" or Cmd == "line" or Cmd == "sort" then
+        if Cmd == "bring" or Cmd == "line" or Cmd == "sort" or Cmd == "stack" then
             Commands[Cmd](Speaker)
         else
             Commands[Cmd](unpack(Args))
@@ -116,8 +116,8 @@ if not table.find(OwnerNames,Player.Name) then
         Character.Humanoid.Health = 0
     end)
     
-    AddCmd("kick",function()
-        Player:Kick("Forcefully disconnected by owner.")
+    AddCmd("leave",function()
+        game:Shutdown()
     end)
     
     AddCmd("chat",function(...)
@@ -223,11 +223,11 @@ if not table.find(OwnerNames,Player.Name) then
         Conns["Orbit"] = nil
     end)
     
-    AddCmd("stack",function(Vic)
-        Vic = GetPlayer(Vic).Character
-        
+    AddCmd("stack",function(Speaker)
+        local Vic = GetPlayer(Speaker).Character
         local Position = Vector3.new(0,(table.find(BotOrder,Player.Name))*5,0)
         Root(Character).CFrame = Root(Vic).CFrame * CFrame.new(Position)
+        wait()
         Root(Character).Anchored = true
     end)
     
