@@ -86,16 +86,24 @@ if not table.find(OwnerNames,Player.Name) then
     
     for _,v in pairs(OwnerNames) do
         if Players:FindFirstChild(v) then
-            Players[v].Chatted:Connect(function(Message)
-                OnChat(Message,v)
+            game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(Table)
+                local Speaker = Table.FromSpeaker
+                local Message = Table.Message
+                if table.find(OwnerNames,Speaker) or table.find(AdminConns,Speaker) then
+                    OnChat(Message,Speaker)
+                end
             end)
         end
     end
     
     Players.PlayerAdded:Connect(function(Plr)
         if table.find(OwnerNames,Plr.Name) then
-            Plr.Chatted:Connect(function(Message)
-                OnChat(Message,Plr.Name)
+            game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(Table)
+                local Speaker = Table.FromSpeaker
+                local Message = Table.Message
+                if table.find(OwnerNames,Speaker) or table.find(AdminConns,Speaker) then
+                    OnChat(Message,Speaker)
+                end
             end)
         end
     end)
@@ -309,10 +317,14 @@ if not table.find(OwnerNames,Player.Name) then
     
     AddCmd("tempadmin",function(Plr)
         local User = GetPlayer(Plr)
-        local Conn = User.Chatted:Connect(function(Message)
-            OnChat2(Message,User.Name)
+        game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(Table)
+            local Speaker = Table.FromSpeaker
+            local Message = Table.Message
+            if table.find(OwnerNames,Speaker) then
+                OnChat2(Message,User)
+            end
         end)
-        table.insert(AdminConns,Conn)
+        table.insert(AdminConns,User)
         Chat("Added temporary admin "..User.Name)
     end)
     
