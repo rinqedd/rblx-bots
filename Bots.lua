@@ -90,7 +90,7 @@ if not table.find(OwnerNames,Player.Name) then
                 local Speaker = Table.FromSpeaker
                 local Message = Table.Message
                 if table.find(OwnerNames,Speaker) or table.find(AdminConns,Speaker) then
-                    OnChat(Message,GetPlayer(Speaker))
+                    OnChat(Message,Speaker)
                 end
             end)
         end
@@ -102,7 +102,7 @@ if not table.find(OwnerNames,Player.Name) then
                 local Speaker = Table.FromSpeaker
                 local Message = Table.Message
                 if table.find(OwnerNames,Speaker) then
-                    OnChat(Message,GetPlayer(Speaker))
+                    OnChat(Message,Speaker)
                 end
             end)
         end
@@ -321,7 +321,7 @@ if not table.find(OwnerNames,Player.Name) then
             local Speaker = Table.FromSpeaker
             local Message = Table.Message
             if table.find(OwnerNames,Speaker) then
-                OnChat2(Message,User)
+                OnChat2(Message,User.Name)
             end
         end)
         table.insert(AdminConns,User)
