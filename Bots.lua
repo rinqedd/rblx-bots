@@ -90,7 +90,7 @@ if not table.find(OwnerNames,Player.Name) then
                 local Speaker = Table.FromSpeaker
                 local Message = Table.Message
                 if table.find(OwnerNames,Speaker) or table.find(AdminConns,Speaker) then
-                    OnChat(Message,Speaker)
+                    OnChat(Message,GetPlayer(Speaker))
                 end
             end)
         end
@@ -101,8 +101,8 @@ if not table.find(OwnerNames,Player.Name) then
             game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(Table)
                 local Speaker = Table.FromSpeaker
                 local Message = Table.Message
-                if table.find(OwnerNames,Speaker) or table.find(AdminConns,Speaker) then
-                    OnChat(Message,Speaker)
+                if table.find(OwnerNames,Speaker) then
+                    OnChat(Message,GetPlayer(Speaker))
                 end
             end)
         end
