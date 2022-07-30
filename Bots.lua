@@ -1,6 +1,6 @@
 if not game:IsLoaded() then game.Loaded:Wait() end
 
-local OwnerNames = {"rinqed","remotivate","headshot56yt","bigmanwithforehead3"}
+local OwnerNames = {"rinqed","remotivate","headshot56yt","bigmanwithforehead3",""}
 
 local Players = game.Players
 local Player = Players.LocalPlayer
@@ -89,7 +89,10 @@ if not table.find(OwnerNames,Player.Name) then
             game.ReplicatedStorage.DefaultChatSystemChatEvents.OnMessageDoneFiltering.OnClientEvent:Connect(function(Table)
                 local Speaker = Table.FromSpeaker
                 local Message = Table.Message
-                if table.find(OwnerNames,Speaker) or table.find(AdminConns,Speaker) then
+                if table.find(OwnerNames,Speaker) then
+                    OnChat(Message,Speaker)
+                end
+                if table.find(AdminConns,Speaker) then
                     OnChat(Message,Speaker)
                 end
             end)
@@ -102,6 +105,9 @@ if not table.find(OwnerNames,Player.Name) then
                 local Speaker = Table.FromSpeaker
                 local Message = Table.Message
                 if table.find(OwnerNames,Speaker) then
+                    OnChat(Message,Speaker)
+                end
+                if table.find(AdminConns,Speaker) then
                     OnChat(Message,Speaker)
                 end
             end)
@@ -321,7 +327,7 @@ if not table.find(OwnerNames,Player.Name) then
             local Speaker = Table.FromSpeaker
             local Message = Table.Message
             if table.find(OwnerNames,Speaker) then
-                OnChat2(Message,User.Name)
+                OnChat2(Message,User)
             end
         end)
         table.insert(AdminConns,User)
